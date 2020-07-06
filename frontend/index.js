@@ -30,7 +30,6 @@ function ShippingBlock() {
   useLoadable(cursor);
 
   useWatchable(cursor, ["selectedRecordIds"], () => {
-    console.log(cursor);
     if (cursor.selectedRecordIds.length > 0) {
       setSelectedRecordId(cursor.selectedRecordIds[0]);
     }
@@ -79,8 +78,7 @@ function ShippingBlock() {
       const trackingNumberValue = selectedRecord.getCellValueAsString(
         trackingField
       );
-      console.log("cellValue", trackingNumberValue);
-      console.log("showCreateShipmentScreen",showCreateShipmentScreen)
+
       if (trackingNumberValue) {
         setTrackingNumber(trackingNumberValue);
       } else {

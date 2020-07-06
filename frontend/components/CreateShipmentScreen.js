@@ -102,7 +102,6 @@ const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) =
   const extractClientName = async (e) => {
     setClientNameField(e);
     const value = record.getCellValueAsString(e);
-    console.log("naaame", value);
     setClientName(value);
   };
 

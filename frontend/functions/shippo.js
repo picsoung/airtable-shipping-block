@@ -13,7 +13,6 @@ export const getTrackingInfo = async ({ carrier, trackingNumber, onSuccess, onEr
     .integration("goshippo")
     .get(`/tracks/${carrier}/${trackingNumber}`)
     .then(({ data }) => {
-      console.log(data)
       onSuccess && onSuccess(data);
     })
     .catch(err => {
@@ -40,8 +39,6 @@ export const createShipment = async ({fromDetails, toDetails, parcel, onSuccess,
          }]
     } })
     .then(({ data }) => {
-      console.log(data)
-      console.log(JSON.stringify(data))
       onSuccess && onSuccess(data);
     })
     .catch(err => {
@@ -59,8 +56,6 @@ export const createTransaction = async ({rate, onSuccess, onError}) => {
         }
     })
     .then(({ data }) => {
-      console.log(data)
-      console.log(JSON.stringify(data))
       onSuccess && onSuccess(data);
     })
     .catch(err => {

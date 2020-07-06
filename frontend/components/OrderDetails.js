@@ -13,7 +13,6 @@ import {
 } from "@airtable/blocks/ui";
 
 const OrderDetails = ({ table, recordId, field }) => {
-  console.log(table, recordId, field);
   const globalConfig = useGlobalConfig();
   // const shippoAPIKey = globalConfig.get("shippoAPIKey");
   const [lineItems, setLineItems] = useState(null);
@@ -26,7 +25,6 @@ const OrderDetails = ({ table, recordId, field }) => {
   const lines = record.getCellValue(field);
   const lineRecords = lines.map((r) => {
     let orderRecord = useRecordById(orderLinesTable, r.id);
-    console.log(orderRecord);
     return orderRecord;
   });
 

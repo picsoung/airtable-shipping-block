@@ -51,8 +51,6 @@ const QuoteDetailsScreen = ({ tableId, recordId, trackingNumber, details, showSc
     createTransaction({
       rate: selectedRate,
       onSuccess: (data) => {
-        console.log('ahhh',data)
-        console.log(JSON.stringify(data))
   
         let trackingNumberFieldId = globalConfig.get('trackingNumberFieldId')
         let recordDetails = {
