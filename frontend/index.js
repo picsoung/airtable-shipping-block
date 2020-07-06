@@ -89,8 +89,7 @@ function ShippingBlock() {
     }
   }, [selectedRecord]);
 
-  if (isShowingSettings) {
-    //   if (!shippoAPIKey) return <ConnectView/>;
+  if (isShowingSettings || !shippoAPIKey || !orderTableId) {
     return <SettingsScreen setVisible={setIsShowingSettings} />;
   }
 
