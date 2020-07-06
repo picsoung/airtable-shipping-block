@@ -22,6 +22,7 @@ import { FieldType } from "@airtable/blocks/models";
 import { cursor } from "@airtable/blocks";
 import OrderDetails from "./OrderDetails";
 import { createShipment } from "../functions/shippo";
+import QuoteDetailsScreen from "./QuoteDetailsScreen";
 
 const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) => {
   const base = useBase();
@@ -40,7 +41,7 @@ const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) =
   const [orderLineItemsField, setOrderLineItemsField] = useState(null);
 
   const [loading, setLoading] = useState(null);
-  const [showQuoteDetailsScreen, setShowQuoteDetailsScreen] = useState(null);
+  const [showQuoteDetailsScreen, setShowQuoteDetailsScreen] = useState(false);
   const [quoteDetails, setQuoteDetails] = useState(null);
 
   if (!selectedTableId) {
@@ -87,8 +88,8 @@ const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) =
       },
       onSuccess: (data) => {
         setLoading(false)
-        showQuoteDetailsScreen(true)
         setQuoteDetails(data)
+        setShowQuoteDetailsScreen(true)
       }
     });
   };
@@ -105,7 +106,8 @@ const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) =
     setClientName(value);
   };
 
-  return !loading ? (
+  return <>
+  {!loading && !showQuoteDetailsScreen && (
     <Box>
       <Heading>Create a new Shipment</Heading>
       <FormField label="From Address">
@@ -135,7 +137,7 @@ const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) =
       </FormField>
       <FormField label="Which column contains order line items?">
         <FieldPicker
-          allowedTypes={[FieldType.MULTIPLE_RECORD_LINKS, FieldType.ROLLUP]}
+          allowedTypes={[FieldType.MULTIPLE_RECORD_LINKS]}
           field={orderLineItemsField}
           table={table}
           onChange={setOrderLineItemsField}
@@ -157,7 +159,10 @@ const CreateShipmentScreen = ({ activeTableId, selectedRecordId, showScreen }) =
         </Button>
       </Box>
     </Box>
-  ) : (<Loader/>);
+  )}
+  {!loading && showQuoteDetailsScreen && (<QuoteDetailsScreen tableId={selectedTableId} details={quoteDetails} recordId={selectedRecordId} howScreen={showScreen}/>)}
+  {loading && (<Loader/>)}
+  </>
 };
 
 export default CreateShipmentScreen;

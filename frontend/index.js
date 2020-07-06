@@ -20,6 +20,7 @@ import TrackingDetails from "./components/TrackingDetails";
 function ShippingBlock() {
   const globalConfig = useGlobalConfig();
   const shippoAPIKey = globalConfig.get("shippoAPIKey");
+  const orderTableId = globalConfig.get("orderTableId")
 
   const [selectedRecordId, setSelectedRecordId] = useState(null);
   const [trackingNumber, setTrackingNumber] = useState(null);
@@ -38,13 +39,13 @@ function ShippingBlock() {
   //delet when change table or view
   useWatchable(cursor, ["activeTableId", "activeViewId"], () => {
     setSelectedRecordId(null);
-    setSelectedFieldId(null);
     setShowCreateShipmentScreen(false)
     setTrackingNumber(null)
   });
 
   const base = useBase();
   const activeTable = base.getTableByIdIfExists(cursor.activeTableId);
+  const orderTable = base.getTableByIdIfExists(orderTableId);
 
   //settings setup
   const [isShowingSettings, setIsShowingSettings] = useState(false);
@@ -58,18 +59,18 @@ function ShippingBlock() {
     }
   }, [shippoAPIKey]);
 
-  const trackingField = globalConfig.get("trackingNumberFieldId")
+    const trackingField = globalConfig.get("trackingNumberFieldId")
     ? activeTable.getFieldByIdIfExists(
         globalConfig.get("trackingNumberFieldId")
       )
     : null;
 
-  const selectedRecord = useRecordById(
-    activeTable,
-    selectedRecordId ? selectedRecordId : "",
-    {
-      fields: [trackingField],
-    }
+    const selectedRecord = useRecordById(
+      activeTable,
+      selectedRecordId ? selectedRecordId : "",
+      {
+        fields: [trackingField],
+      }
   );
 
   useEffect(() => {
@@ -105,14 +106,14 @@ function ShippingBlock() {
   return (
     <Box padding={3}>
       <Box>
-        {!showCreateShipmentScreen && selectedRecordId && trackingNumber && (
+        {!showCreateShipmentScreen && cursor.activeTableId === orderTableId && selectedRecordId && trackingNumber && (
           <TrackingDetails
             activeTable={activeTable}
             selectedRecordId={selectedRecordId}
             trackingNumber={trackingNumber}
           />
         )}
-        {!showCreateShipmentScreen && selectedRecordId && !trackingNumber && (
+        {!showCreateShipmentScreen && cursor.activeTableId === orderTableId && selectedRecordId && !trackingNumber && (
           <Box>
             <Box
               display="flex"
@@ -145,7 +146,8 @@ function ShippingBlock() {
               selectedRecordId={selectedRecordId}
               showScreen={closeScreen}/>
           )}
-        {!selectedRecordId && (<h1>Select an order in your table to get started.</h1>)}
+        {cursor.activeTableId != orderTableId && (<Heading>Shipping block is only working on table <i>{orderTable.name}</i></Heading>)}
+        {!selectedRecordId && cursor.activeTableId === orderTableId && (<h1>Select an order in your table to get started.</h1>)}
       </Box>
     </Box>
   );

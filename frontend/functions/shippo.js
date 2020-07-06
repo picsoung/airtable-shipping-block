@@ -41,9 +41,29 @@ export const createShipment = async ({fromDetails, toDetails, parcel, onSuccess,
     } })
     .then(({ data }) => {
       console.log(data)
+      console.log(JSON.stringify(data))
       onSuccess && onSuccess(data);
     })
     .catch(err => {
       console.log("getTrackingInfo Error: ", err.response.data);
+    })
+}
+
+export const createTransaction = async ({rate, onSuccess, onError}) => {
+    bearerClient
+    .integration("goshippo")
+    .post(`/transactions/`,{
+        body: {
+            rate,
+            async: "false"
+        }
+    })
+    .then(({ data }) => {
+      console.log(data)
+      console.log(JSON.stringify(data))
+      onSuccess && onSuccess(data);
+    })
+    .catch(err => {
+      console.log("createTransaction Error: ", err);
     })
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text, Icon, colorUtils, colors } from "@airtable/blocks/ui";
 import LocationDetails from "./LocationDetails";
 
-const FromTo = ({ from, to }) => {
+const FromTo = ({ from, to, fromName, toName }) => {
   return (
     <Box
       flexDirection="row"
@@ -17,7 +17,7 @@ const FromTo = ({ from, to }) => {
         padding={3}
         flexGrow={1}
       >
-        <Text>🏭</Text>
+        <Text>🏭 {fromName}</Text>
         <LocationDetails location={from} />
       </Box>
       <Box textAlign="center" marginLeft={2} marginRight={2}>
@@ -30,7 +30,7 @@ const FromTo = ({ from, to }) => {
         padding={3}
         flexGrow={1}
       >
-        <Text>🏠</Text>
+        <Text>🏠 {toName}</Text>
         <LocationDetails location={to} />
       </Box>
     </Box>
