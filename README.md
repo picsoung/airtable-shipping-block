@@ -67,5 +67,13 @@ How to use the shipping block
 ## Support
 Feel free to reach out if you either want to use this block, if you found a bug.
 
+## How to remix this block
+
+1. Create a new base (or you can use an existing base).
+
+2. Create a new block in your base (see [Create a new block](https://airtable.com/developers/blocks/guides/hello-world-tutorial#create-a-new-block),
+   selecting "Remix from Github" as your template.
+
+3. From the root of your new block, run `block run`.
 <!-- ## License
 GNU General Public License 3 (GPL-3.0) 2020 - Nicolas Grenié. Please have a look at the `LICENSE.md` for more details. -->
