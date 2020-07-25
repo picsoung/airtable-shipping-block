@@ -13,6 +13,7 @@
 <br />
 
 <div align="center">
+<object data="https://img.shields.io/github/followers/picsoung?style=social"></object>
   <img alt="GitHub followers" src="https://img.shields.io/github/followers/picsoung?style=social">
   <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/picsoung?style=social">
   <img alt="License" src="https://img.shields.io/badge/License-GPLv3-blue.svg">
