@@ -62,7 +62,8 @@ The base should be organized following way:
 
 ## Demo
 How to use the shipping block
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5BoHy12nxB0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![demo airtable](https://img.youtube.com/vi/5BoHy12nxB0/0.jpg)](https://www.youtube.com/watch?v=5BoHy12nxB0)
+
 
 ## Support
 Feel free to reach out if you either want to use this block, if you found a bug.
